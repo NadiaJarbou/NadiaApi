@@ -1,6 +1,8 @@
-const apiurl =  'https://newsapi.org/v2/everything?q=tesla&from=2023-04-17&sortBy=publishedAt&apiKey=b9ac7567b4ec4c99ab60b8d1fdb2d09e';
+const apiKey = '48f451365d5643dda1a7926d296e324b';
+const url = `https://newsapi.org/v2/everything?language=en&q=IT OR programming OR marketing&apiKey=${apiKey}`;
 
-fetch(apiurl)
+
+fetch(url)
 .then((data) => {
     return data.json();
 })
@@ -109,7 +111,7 @@ fetch(apiurl)
         big[0].appendChild(container);
         
     }
-
-
-    console.log(JSON.stringify(news.articles, null, 2));
-});
+})
+.catch((error) => {
+    console.log('Error:', error);
+  });
