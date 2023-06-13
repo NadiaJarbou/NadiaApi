@@ -8,7 +8,7 @@ fetch(url)
     })
     .then((news) => {
 
-        console.log(JSON.stringify(news, null, 2))
+        // console.log(JSON.stringify(news, null, 2))
 
         let small = document.getElementsByClassName("small-column");
         const articles = news.articles.slice(0, 4);

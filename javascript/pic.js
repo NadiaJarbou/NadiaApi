@@ -4,6 +4,10 @@ const nasaApiUrl = `https://api.nasa.gov/planetary/apod?api_key=${nasaApiKey}`;
 fetch(nasaApiUrl)
   .then((response) => response.json())
   .then((data) => {
+
+    console.log(JSON.stringify(data, null, 2))
+
+
     let sidebar = document.getElementsByClassName("sidebar");
 
     let container = document.createElement("div");
@@ -13,9 +17,13 @@ fetch(nasaApiUrl)
     title.innerText = "NASA Astronomy Picture of the Day";
     title.style.marginTop = "40px";
 
-    let image = document.createElement("img");
+    // let image = document.createElement("img");
+    // image.src = data.url;
+    // image.alt = "NASA APOD";
+
+    let image = document.createElement("iframe");
     image.src = data.url;
-    image.alt = "NASA APOD";
+    image.title = "NASA APOD";
 
     let description = document.createElement("p");
     description.innerText = truncateDescription(data.explanation, 2);
