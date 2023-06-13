@@ -3,115 +3,134 @@ const url = `https://newsapi.org/v2/everything?language=en&q=IT OR programming O
 
 
 fetch(url)
-.then((data) => {
-    return data.json();
-})
-.then((news) => {
-    
-    let small = document.getElementsByClassName("small-column");
-    const articles = news.articles.slice(0, 4);
+    .then((data) => {
+        return data.json();
+    })
+    .then((news) => {
 
-    for(i=0; i < articles.length; i++) {
-        // 1. create dive with className
-        let box = document.createElement("div");
-        box.className = "article";
+        console.log(JSON.stringify(news, null, 2))
 
-        // 2. add image to the div
-        let img = document.createElement("img");
-        img.src = articles[i].urlToImage;
-        
-        // 3. add image to div(box)
-        box.appendChild(img);
+        let small = document.getElementsByClassName("small-column");
+        const articles = news.articles.slice(0, 4);
 
-        // 4. crete h4 element
-        let h4 = document.createElement("h4");
-        h4.className = "published";
-        h4.innerText = articles[i].publishedAt;
+        for (let i = 0; i < articles.length; i++) {
+            // 1. create dive with className
+            let box = document.createElement("div");
+            box.className = "article";
 
-        // 5. add h4 to div(box)
-        box.appendChild(h4);
+            // 2. add image to the div
+            let img = document.createElement("img");
+            img.src = articles[i].urlToImage;
 
-        // 6. creat link
-        let a = document.createElement("a");
-        a.href="#"
+            // 3. add image to div(box)
+            box.appendChild(img);
 
-        // 7. creat h3 element
-        let h3= document.createElement("h3");
-        h3.className = "title";
-        h3.innerText = articles[i].title;
+            // 4. crete h4 element
+            let h4 = document.createElement("h4");
+            h4.className = "published";
+            h4.innerText = articles[i].publishedAt;
 
-        // 8. add h3 to a
-        a.appendChild(h3);
+            // 5. add h4 to div(box)
+            box.appendChild(h4);
 
-        // 9. add a to div(box)
-        box.appendChild(a);
+            // 6. creat link
+            let a = document.createElement("a");
+            a.href = articles[i].url;
 
-        // 10. creat h4 element
-        let author = document.createElement("h4");
-        author.className = "author";
-        author.innerText = articles[i].author;
+            // 7. creat h3 element
+            let h3 = document.createElement("h3");
+            h3.className = "title";
+            h3.innerText = articles[i].title;
 
-        // 11. add author to div(box)
-        box.appendChild(author);
+            // 8. add h3 to a
+            a.appendChild(h3);
 
+            // 9. add a to div(box)
+            box.appendChild(a);
 
-        small[0].appendChild(box);
-    }
+            // 10. creat h4 element
+            let author = document.createElement("h4");
+            author.className = "author";
+            author.innerText = articles[i].author;
 
-    let big = document.getElementsByClassName("big-column");
-    const posts = news.articles.slice(13, 16);
-    for (i=0; i < posts.length; i++) {
+            // 11. add author to div(box)
+            box.appendChild(author);
 
-        // 1. creat div with className
-        let container= document.createElement("div");
-        container.className = "article";
+            small[0].appendChild(box);
+        }
 
-        // 2. add image to the div
-        let img = document.createElement("img");
-        img.src = posts[i].urlToImage;
+        let big = document.getElementsByClassName("big-column");
+        const posts = news.articles.slice(14, 17);
+        for (let j = 0; j < posts.length; j++) {
 
-        // 3. add image to div(container)
-        container.appendChild(img);
+            // 1. creat div with className
+            let container = document.createElement("div");
+            container.className = "article";
 
-        // 4. creat h4 element
-        let h4 = document.createElement("h4");
-        h4.className = "title";
-        h4.innerText = posts[i].title;
-        
-        // 5. add h4 to div(container)
-        container.appendChild(h4);
+            // 2. add image to the div
+            let img = document.createElement("img");
+            img.src = posts[j].urlToImage;
 
-         // 6. creat link
-        let a = document.createElement("a");
-        a.href="#"
+            // 3. add image to div(container)
+            container.appendChild(img);
 
-        // 7. creat h3 element
-        let h3 = document.createElement("h3");
-        h3.innerText = posts[i].description;
+            // 4. creat h4 element
+            let h4 = document.createElement("h4");
+            h4.className = "title";
+            h4.innerText = posts[j].title;
 
-        // 8. add h3 to a
-        a.appendChild(h3);
+            // 5. add h4 to div(container)
+            container.appendChild(h4);
 
-         // 9. add a to div(container)
-        container.appendChild(a);
+            // 6. creat link
+            let a = document.createElement("a");
+            a.href = posts[j].url;
 
-         // 10. creat h4 element
-        let author = document.createElement("h4");
-        author.className = "author";
-        author.innerText = posts[i].author;
+            // 7. creat h3 element
+            let h3 = document.createElement("h3");
+            h3.innerText = posts[j].description;
 
-        // 11. add author to div(box)
+            // 8. add h3 to a
+            a.appendChild(h3);
 
-        container.appendChild(author);
+            // 9. add a to div(container)
+            container.appendChild(a);
 
+            // 10. creat h4 element
+            let author = document.createElement("h4");
+            author.className = "author";
+            author.innerText = posts[j].author;
 
+            // 11. add author to div(box)
+            container.appendChild(author);
 
-        
+            big[0].appendChild(container);
 
-        big[0].appendChild(container);
-        
-    }
-})
-.catch((error) => {
-    console.log('Error:', error);
-  });
+        }
+
+        // sidebar news
+        let side = document.getElementById("top");
+        const sideNews = news.articles.slice(18, 24);
+        for (let i = 0; i < sideNews.length; i++) {
+            let con = document.createElement("div");
+            con.className = "last-article";
+
+            let a = document.createElement("a");
+            a.href = sideNews[i].url;
+
+            let h3 = document.createElement("h3");
+            h3.innerText = sideNews[i].title;
+
+            a.appendChild(h3);
+            con.appendChild(a);
+            side.appendChild(con);
+
+            let hr = document.createElement("hr");
+            hr.style = "width: 100%";
+            side.appendChild(hr);
+        }
+
+    })
+    .catch((error) => {
+        console.log('Error:', error);
+    });
