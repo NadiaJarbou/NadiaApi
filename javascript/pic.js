@@ -17,13 +17,19 @@ fetch(nasaApiUrl)
     title.innerText = "NASA Astronomy Picture of the Day";
     title.style.marginTop = "40px";
 
-    // let image = document.createElement("img");
-    // image.src = data.url;
-    // image.alt = "NASA APOD";
+    // check if url is imge or video(conditioner rendering)
+    let image = undefined;
 
-    let image = document.createElement("iframe");
-    image.src = data.url;
-    image.title = "NASA APOD";
+    if (isImage(data.url)) {
+      image = document.createElement("img");
+      image.src = data.url;
+      image.alt = "NASA APOD";
+    } else {
+      image = document.createElement("iframe");
+      image.src = data.url;
+      image.title = "NASA APOD";
+    }
+
 
     let description = document.createElement("p");
     description.innerText = truncateDescription(data.explanation, 2);
@@ -44,4 +50,8 @@ function truncateDescription(text, numSentences) {
   const sentences = text.split('. ');
 
   return sentences.slice(0, numSentences).join('. ') + '.';
+}
+
+function isImage(url) {
+  return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
 }
